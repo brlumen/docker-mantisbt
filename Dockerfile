@@ -22,7 +22,7 @@ ENV MANTIS_TIMEZONE Europe/Berlin
 
 RUN set -xe \
     && curl -fSL ${MANTIS_URL} -o ${MANTIS_FILE} \
-    && echo "${MANTIS_SHA1}  ${MANTIS_FILE}" | sha1sum -c \
+#   && echo "${MANTIS_SHA1}  ${MANTIS_FILE}" | sha1sum -c \
     && tar -xz --strip-components=1 -f ${MANTIS_FILE} \
     && rm ${MANTIS_FILE} \
     && chown -R www-data:www-data .
