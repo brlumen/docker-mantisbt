@@ -12,7 +12,7 @@ RUN set -xe \
     && apt-get install -y libpng-dev libjpeg-dev libpq-dev libxml2-dev \
     && docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
     && docker-php-ext-install gd mbstring mysql mysqli pgsql soap \
-    && pecl install xdebug-2.6.0 \
+    && pecl install xdebug-2.5.5 \
     && docker-php-ext-enable xdebug \
     && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.remote_autostart=off" >> /usr/local/etc/php/conf.d/xdebug.ini \
