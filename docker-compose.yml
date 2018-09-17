@@ -1,5 +1,7 @@
 mantisbt:
   image: xlrl/mantisbt:latest
+  environment:
+    XDEBUG_CONFIG: remote_host={{192.168.0.202}}
   ports:
     - "8989:80"
   links:
