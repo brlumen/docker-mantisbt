@@ -43,6 +43,7 @@ mysql:
 
 > You can use `mysql`/`postgres` instead of `mariadb`.
 
+```
 mantisbt:
   image: brlumen/docker-mantisbt:latest
   environment:
@@ -78,6 +79,7 @@ postgres:
   restart: always
   volumes:
     - /srv/mantis/pgsql:/var/lib/postgresql/data
+```
 
 ## Install
 
