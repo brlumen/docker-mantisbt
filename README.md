@@ -6,7 +6,20 @@ The examples suppose you will have the data for your containers in `/srv/mantis`
 
 ```
 mantisbt:
-  image: xlrl/mantisbt:latest
+  image: brlumen/docker-mantisbt:latest
+  environment:
+        PHP_XDEBUG_ENABLED: 1
+        XDEBUG_CONFIG: remote_host={HOST}
+        XDEBUG_CONFIG: remote_port={HOST}
+        XDEBUG_CONFIG: remote_autostart=off
+        XDEBUG_CONFIG: remote_enable=on
+        XDEBUG_CONFIG: remote_handler=dbgp
+        XDEBUG_CONFIG: remote_mode=req
+        XDEBUG_CONFIG: idekey=PHPSTORM
+        XDEBUG_CONFIG: output_buffering=off
+        XDEBUG_CONFIG: remote_log=/var/log/xdebug.log
+        XDEBUG_CONFIG: default_enable = 1
+
   ports:
     - "8989:80"
   links:
@@ -30,6 +43,42 @@ mysql:
 
 > You can use `mysql`/`postgres` instead of `mariadb`.
 
+mantisbt:
+  image: brlumen/docker-mantisbt:latest
+  environment:
+        PHP_XDEBUG_ENABLED: 1
+        XDEBUG_CONFIG: remote_host={HOST}
+        XDEBUG_CONFIG: remote_port={HOST}
+        XDEBUG_CONFIG: remote_autostart=off
+        XDEBUG_CONFIG: remote_enable=on
+        XDEBUG_CONFIG: remote_handler=dbgp
+        XDEBUG_CONFIG: remote_mode=req
+        XDEBUG_CONFIG: idekey=PHPSTORM
+        XDEBUG_CONFIG: output_buffering=off
+        XDEBUG_CONFIG: remote_log=/var/log/xdebug.log
+        XDEBUG_CONFIG: default_enable = 1
+
+  ports:
+    - "8989:80"
+  links:
+    - postgres
+  restart: always
+  volumes:
+    - /srv/mantis/config:/var/www/html/config
+    - /srv/mantis/custom:/var/www/html/custom
+    - /srv/mantis/plugins:/var/www/html/plugins
+
+
+postgres:
+  image: postgres:latest
+  environment:
+    - POSTGRES_USER=root
+    - POSTGRES_PASSWORD=root
+    - POSTGRES_DB=bugtracker
+  restart: always
+  volumes:
+    - /srv/mantis/pgsql:/var/lib/postgresql/data
+
 ## Install
 
 ```
@@ -44,6 +93,22 @@ Installation Options
 ==================================================================================
 Type of Database                                        MySQL/MySQLi
 Hostname (for Database Server)                          mysql
+Username (for Database)                                 mantisbt
+Password (for Database)                                 mantisbt
+Database name (for Database)                            bugtracker
+Admin Username (to create Database if required)         root
+Admin Password (to create Database if required)         root
+Print SQL Queries instead of Writing to the Database    [ ]
+Attempt Installation                                    [Install/Upgrade Database]
+==================================================================================
+```
+
+```
+==================================================================================
+Installation Options
+==================================================================================
+Type of Database                                        POSTGRES
+Hostname (for Database Server)                          postgres
 Username (for Database)                                 mantisbt
 Password (for Database)                                 mantisbt
 Database name (for Database)                            bugtracker
