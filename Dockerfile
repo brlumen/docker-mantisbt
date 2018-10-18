@@ -17,7 +17,7 @@ RUN set -xe \
     && rm -rf /var/lib/apt/lists/*
 
 ENV MANTIS_VER 2.18.0
-ENV MANTIS_SHA1 3914830a1be19c619f7e9a1e22abe99e9773769c
+ENV MANTIS_SHA1 c6e3e3576d65e9a84c37f31d4b407a8534497043
 ENV MANTIS_URL http://jaist.dl.sourceforge.net/project/mantisbt/mantis-stable/${MANTIS_VER}/mantisbt-${MANTIS_VER}.tar.gz
 ENV MANTIS_FILE mantisbt.tar.gz
 ENV MANTIS_TIMEZONE Europe/Berlin
